@@ -235,7 +235,7 @@ def correlogram(residuals, path='', fig_name='correlogram.pdf', title=None, labe
                                     np.array(residuals[j][0:max_length]),
                                     unbiased=True)
                 axes.plot(ccf[0: n_lags + 1], color=palette[0])
-                axes.set_xlim(xmin=0, xmax=n_lags)
+                axes.set_xlim(0, n_lags)
             else:
                 for m in range(n_models):
                     max_length = min(
@@ -246,7 +246,7 @@ def correlogram(residuals, path='', fig_name='correlogram.pdf', title=None, labe
                                         unbiased=True)
                     axes.plot(ccf[0:n_lags + 1], color=palette[m],
                               label=model_labels[m])
-                    axes.set_xlim(xmin=0, xmax=n_lags)
+                    axes.set_xlim(0, n_lags)
                 if i + j == 0:  # only add legend in the first subplot
                     legend = axes.legend(frameon=1, fontsize=size_legend)
                     legend.get_frame().set_facecolor('white')
@@ -594,8 +594,8 @@ def kernels_exp(impact_coefficients, decay_coefficients, events_labels=None, sta
             axes.tick_params(axis='both', which='major', labelsize=size_values)
             if log_timescale:
                 axes.set_xscale('log')
-            axes.set_ylim(ymin=0, ymax=norm_max)
-            axes.set_xlim(xmin=t_min, xmax=t_max)
+            axes.set_ylim(0, norm_max)
+            axes.set_xlim(t_min, t_max)
             if np.shape(events_labels) != ():
                 axes.set_title(
                     events_labels[e1] + r' $\rightarrow$ ' + events_labels[e2], fontsize=size_labels)
@@ -676,7 +676,7 @@ def sample_path(times, events, states, model, time_start, time_end, color_palett
     for n in range(model.number_of_event_types):
         ax.plot(aggregated_times, intensities[n], linewidth=1,
                 color=color_palette[n], label=model.events_labels[n])
-    ax.set_ylim(ymin=0)
+    ax.set_ylim(bottom=0)
     ax.set_ylabel('Intensity', fontsize=labelsize)
     ax.set_xlabel('Time', fontsize=labelsize)
     legend = ax.legend(frameon=1, fontsize=legendsize)
@@ -688,8 +688,8 @@ def sample_path(times, events, states, model, time_start, time_end, color_palett
     color_map = ListedColormap(color_palette)
     ax.scatter(times, states, c=events, cmap=color_map, s=s, alpha=1, edgecolors='face',
                zorder=10)
-    ax.set_xlim(xmin=time_start, xmax=time_end)
-    ax.set_ylim(ymin=-0.1, ymax=model.number_of_states - 0.9)
+    ax.set_xlim(time_start, time_end)
+    ax.set_ylim(-0.1, model.number_of_states - 0.9)
     ax.set_yticks(range(model.number_of_states))
     ax.set_yticklabels(model.states_labels, fontsize=ticksize)
     ax.set_ylabel('State', fontsize=labelsize)
