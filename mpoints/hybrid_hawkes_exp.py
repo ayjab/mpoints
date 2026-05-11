@@ -517,7 +517,7 @@ class HybridHawkesExp:
                  initial_partial_sums: Optional[np.array] = None,
                  initial_state: int = 0,
                  max_number_of_events: int = 10**6):
-        """
+        r"""
         Simulates a sample path of the state-dependent Hawkes process.
         The methods wraps a C implementation that was obtained via Cython.
 
